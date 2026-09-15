@@ -1,0 +1,65 @@
+{
+  "name": "dsh-todo-continuity",
+  "version": "0.1.0",
+  "description": "Keeps an unfinished todo list visible across turns: the `todos` projection is deliberately cleared by every turn/start, so an interrupted turn leaves the plan durably in the log but gone from the UI, and todo_write is write-only so nothing can read it back. This plugin re-appends the last list when a turn starts and that list still has unfinished work. · 让没做完的任务清单跨回合保留：todos 投影会被每个 turn/start 有意清空，于是回合被中断后计划只留在日志里、界面上永久消失，而 todo_write 只写不读，谁也拿不回来。本插件在回合开始且清单仍有未完成项时，把最后那份清单补折回去。",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "test",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh.md",
+    "EVIDENCE.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apex-mochen/dsh-todo-continuity.git"
+  },
+  "homepage": "https://github.com/apex-mochen/dsh-todo-continuity#readme",
+  "bugs": {
+    "url": "https://github.com/apex-mochen/dsh-todo-continuity/issues"
+  },
+  "keywords": [
+    "deepseek",
+    "deepseek-harness",
+    "harness",
+    "dsh",
+    "dsh-plugin",
+    "todo",
+    "plan",
+    "session",
+    "projection",
+    "reliability"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node test/smoke.mjs",
+    "check": "node test/smoke.mjs && npm pack --dry-run"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
+}

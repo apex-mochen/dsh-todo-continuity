@@ -1,0 +1,14 @@
+# dsh bundle patch: inserts this plugin into a profile's layer stack.
+#
+# This plugin registers NOTHING but an ordinary `session/event` listener, and it
+# deliberately does not disable or replace `tool-todo`: the projection registry
+# refcounts a repeated key only at an equal `stateVersion` and throws otherwise
+# (`packages/session/session-projection/src/index.ts:276-283`), so a plugin
+# cannot replace the `todos` projection. Appending the folded event is the
+# reachable seam.
+- insert:
+    - id: dsh-todo-continuity
+      name: 'dsh-todo-continuity'
+      # config:
+      #   verbose: true
+      #   enabled: true
